@@ -23,6 +23,12 @@ const colorStyle = {
   width: '100%'
 }
 
+// const titleStyle = {
+//   display: 'flex',
+//   justifyContent:'center',
+//   marginTop: '2rem',
+// }
+
 const hexCodeStyle = {
   display: 'flex',
   flexDirection: 'column',
@@ -31,12 +37,6 @@ const hexCodeStyle = {
   height: '100%',
   
 }
-
-// const refreshStyle = {
-//   display: "flex",
-//   justifyContent: "center",
-//   zIndex: '1'
-// };
 
 const refreshButtonStyle = {
   marginTop: '1rem',
@@ -53,26 +53,54 @@ const reload = () => {
   window.location.reload();
 }
 
-// const hex2rgba = (hex, alpha = 1) => {
-//   const [r, g, b] = hex.match(/\w\w/g).map((x) => parseInt(x, 16));
-//   return `rgba(${r},${g},${b},${alpha})`;
-// };
+const hex2rgba = (hex, alpha = 1) => {
+  const [r, g, b] = hex.match(/\w\w/g).map((x) => parseInt(x, 16));
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+const footerStyle = {
+  backgroundColor: "white",
+  position: "absolute",
+  bottom: "0",
+  height: "2rem",
+  width: "100%",
+};
+
+const footerTextStyle = {
+  display: 'flex', 
+  justifyContent: 'center',
+  fontSize: '1.2rem',
+  alignItems: 'center',
+  height: '100%',
+}
 
 const RandomColorGenerator = () =>{
   return (
     <div className="mainPage" style={colorStyle}>
+      {/* <div className='title' style={titleStyle}><h1><u>Random Color Generator</u></h1></div> */}
       <div className="hexCode" style={hexCodeStyle}>
-        <h1 style={{ backgroundColor: "white", padding: '1rem', borderRadius: '2rem', width: '9rem', justifyContent: 'center'}}>{generatedHexCode}</h1>
+        <h1
+          style={{
+            backgroundColor: "white",
+            padding: "1rem",
+            borderRadius: "2rem",
+            width: "auto",
+            justifyContent: "center",
+          }}>
+          <u>Hex:</u> {generatedHexCode}
+          <br />
+          <u>RGB:</u> {hex2rgba(generatedHexCode)}
+        </h1>
         <button style={refreshButtonStyle} type="button" onClick={reload}>
           Refresh
         </button>
       </div>
-
-      {/* <div className="refreshPage" style={refreshStyle}>
-        <button style={refreshButtonStyle} type="button" onClick={reload}>
-          Refresh
-        </button>
-      </div> */}
+      <div className="footer" style={footerStyle}>
+        <p style={footerTextStyle}>
+          © Copyright 2021 &nbsp;
+          <a href="http://https://github.com/Hamdrive"> Hamza Husein</a>
+        </p>
+      </div>
     </div>
   );
 };
