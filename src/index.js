@@ -1,17 +1,56 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const hexCodeGenerator = () =>{
+  const hexSymbols = '0123456789abcdef';
+  let color = '';
+
+  for(let i=0; i<6; i++){
+    const index = Math.floor(Math.random() * 16)
+    color += hexSymbols[index];
+  }
+
+  return ('#' + color);
+}
+
+const generatedHexCode = hexCodeGenerator(); 
+
+const colorStyle = {
+  backgroundColor: generatedHexCode,
+  position: 'absolute',
+  height: '100%',
+  width: '100%'
+}
+
+const hexCodeStyle = {
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '100%'
+}
+
+const hex2rgba = (hex, alpha = 1) => {
+  const [r, g, b] = hex.match(/\w\w/g).map((x) => parseInt(x, 16));
+  return `rgba(${r},${g},${b},${alpha})`;
+};
+
+console.log(hex2rgba(generatedHexCode));
+
+
+const RandomColorGenerator = () =>{
+  return (
+    <div className='mainPage' style={colorStyle}>
+      <div className='hexCode' style={hexCodeStyle}>
+        <h1>{generatedHexCode}</h1>
+      </div>
+    </div>
+  );
+};
+
+const App = () => <RandomColorGenerator />
+
+
+const rootElement = document.getElementById('root');
+
+ReactDOM.render(<App />, rootElement)
